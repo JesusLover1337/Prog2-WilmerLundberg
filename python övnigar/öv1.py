@@ -5,5 +5,5 @@ for letter in word:
     if letter in konsonanter:
         word_in_rövarspråk = word_in_rövarspråk + letter+"o"+letter
     else:
-        ...
+        word_in_rövarspråk = word_in_rövarspråk + letter    
 print(word_in_rövarspråk)
