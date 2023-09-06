@@ -3,7 +3,7 @@ class Elev:
         self.namn:str = namn
         self.ålder:int = ålder
         self.godkänd:bool = godkänd
-        self.glad:bool = True if godkänd else False
+        self.glad:bool = godkänd
     def presentera(self):
         print(f"Hej! Jag heter {self.namn}.") 
 
