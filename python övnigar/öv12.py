@@ -1,5 +1,4 @@
 def food(s, vegan=False):
-
     if vegan == True:
         return"sojamjölk"
     else:
