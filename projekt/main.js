@@ -86,11 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   var slider = document.getElementById("numberSlider");
-  var output = document.getElementById("selectedNumber");
-  output.innerHTML = "Selected Number: " + slider.value;
-  slider.oninput = function () {
-    output.innerHTML = "Selected Number: " + this.value;
-  };
   slider.addEventListener("change", (e) => {
     const size = e.target.value;
     setBrush(null, parseInt(size), null);
