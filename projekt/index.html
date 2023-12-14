@@ -10,6 +10,24 @@
   <canvas id="drawingCanvas" width="750" height="500"></canvas>
 
 <div class="control-panel">
+    <div class="title">
+        <span class="letters" style="--i:1">b</span>
+        <span class="letters" style="--i:2">r</span>
+        <span class="letters" style="--i:3">u</span>
+        <span class="letters" style="--i:4">s</span>
+        <span class="letters" style="--i:5">h</span>
+    </div>
+    <div class="title">
+        <span class="letters" style="--i:1">c</span>
+        <span class="letters" style="--i:2">u</span>
+        <span class="letters" style="--i:3">s</span>
+        <span class="letters" style="--i:4">t</span>
+        <span class="letters" style="--i:5">o</span>
+        <span class="letters" style="--i:6">m</span>
+        <span class="letters" style="--i:7">i</span>
+        <span class="letters" style="--i:8">z</span>
+        <span class="letters" style="--i:9">e</span>
+    </div>
     <div class="pairs">
   <label for="brushSelector">Select Brush: </label>
   <select id="brushSelector">
@@ -27,7 +45,10 @@
 </div>
 
   <button onclick="clearArea()">Clear Area</button>
+  <label >Brush Preview: </label>
+  <div class="pre-view"><canvas id="preViewCanvas" width="50" height="50"></canvas></div>
 </div>
+
 <script src="main.js"></script>
 </body>
 </html>

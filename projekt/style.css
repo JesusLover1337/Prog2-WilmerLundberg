@@ -13,9 +13,12 @@ body{
     background-color: gray; 
 }
 .control-panel{
+    position: absolute;
+    top: 10px;
+    left: 10px;
     display: flex;
     margin: auto;
-    padding: 15px;
+    padding: 10px;
     justify-content: center;
     align-items: center;
     flex-direction:column; 
@@ -25,3 +28,23 @@ body{
 .pairs{
     padding: 3px;
 }
+.title .letters {
+    font-family: "Oxygen", sans-serif;
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    color: rgb(39, 39, 39);
+    text-transform: uppercase;
+    animation: flip 3s infinite;
+    animation-delay: calc(.2s * var(--i))
+}
+@keyframes flip {
+    0%,80% {
+      transform: rotateY(360deg) 
+    }
+}
+
+ .pre-view{
+    padding-top: 3px;
+
+} 

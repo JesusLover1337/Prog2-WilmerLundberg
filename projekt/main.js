@@ -1,6 +1,27 @@
 class Brush {
-  constructor(ctx, size, color) {
+  constructor(ctx) {
     this.ctx = ctx;
+  }
+  drawPreview(x, y, previewCtx) {
+    previewCtx.clearRect(
+      0,
+      0,
+      previewCtx.canvas.width,
+      previewCtx.canvas.height
+    );
+    previewCtx.lineJoin = this.ctx.lineJoin;
+    previewCtx.lineCap = this.ctx.lineCap;
+    previewCtx.lineWidth = this.ctx.lineWidth;
+    previewCtx.strokeStyle = this.ctx.strokeStyle;
+
+    previewCtx.beginPath();
+    previewCtx.moveTo(x, y);
+    if (previewCtx.lineCap === "butt") {
+      previewCtx.lineTo(x + previewCtx.lineWidth, y);
+    } else {
+      previewCtx.lineTo(x, y);
+    }
+    previewCtx.stroke();
   }
 }
 class RoundBrush extends Brush {
@@ -25,7 +46,7 @@ class RoundBrush extends Brush {
 class RectBrush extends Brush {
   constructor(ctx, size, color) {
     super(ctx, size, color);
-    this.ctx.lineJoin = "bevel";
+    this.ctx.lineJoin = "butt";
     this.ctx.lineCap = "butt";
     this.ctx.lineWidth = size;
     this.ctx.strokeStyle = color;
@@ -57,6 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (brushType === null && size === null) {
       currentBrush.ctx.strokeStyle = color;
+    }
+    if (currentBrush.ctx.lineCap === "butt") {
+      currentBrush.drawPreview(25 - currentBrush.ctx.lineWidth / 2, 25, ctx2);
+    } else {
+      currentBrush.drawPreview(25, 25, ctx2);
     }
   }
   setBrush("RoundBrush", 8, "black");
@@ -106,3 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function clearArea() {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
+
+const canvas2 = document.getElementById("preViewCanvas");
+const ctx2 = canvas2.getContext("2d");
