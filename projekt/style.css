@@ -3,9 +3,6 @@ canvas {
     margin: auto;
     display: block;
     background-color: white;
-    z-index: 2;
-    
-    
 }
 body{
     overflow: hidden;
@@ -24,7 +21,6 @@ body{
     flex-direction:column; 
     background-color: rgb(82, 82, 82);
     border-radius: 10px;
-
 }
 .pairs{
     padding: 3px;
