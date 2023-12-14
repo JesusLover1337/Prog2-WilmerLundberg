@@ -7,6 +7,13 @@
   <title>Touch Drawing</title>
 </head>
 <body>
+    <div class="title">
+    <span class="letters" style="--i:1">H</span>
+        <span class="letters" style="--i:2">e</span>
+        <span class="letters" style="--i:3">l</span>
+        <span class="letters" style="--i:4">l</span>
+        <span class="letters" style="--i:5">o</span>
+    </div>
   <canvas id="drawingCanvas" width="750" height="500"></canvas>
 
 <div class="control-panel">
@@ -43,11 +50,10 @@
   <label >Select Color: </label>
   <input type="color" id="colorPicker" value="#000000">
 </div>
-
-  <button onclick="clearArea()">Clear Area</button>
   <label >Brush Preview: </label>
   <div class="pre-view"><canvas id="preViewCanvas" width="50" height="50"></canvas></div>
 </div>
+<button onclick="clearArea()">Clear Area</button>
 
 <script src="main.js"></script>
 </body>
