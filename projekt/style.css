@@ -1,0 +1,12 @@
+canvas {
+    border: 1px solid #000;
+  }
+  body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  }
+  .control-panel{
+
+}

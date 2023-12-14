@@ -1,25 +1,113 @@
-const canvas = document.getElementById("box");
-const ctx = canvas.getContext("2d");
-const canvas_width = (canvas.width = 900);
-const canvas_height = (canvas.height = 650);
-
-class SpriteSheet {
-  constructor(imgPath, width, height) {
-    this.imgPath = imgPath;
-    this.width = width;
-    this.height = height;
+class Brush {
+  constructor(ctx, size, color) {
+    this.ctx = ctx;
   }
-
-  load() {}
-
-  draw(context, x, y) {}
 }
-
-class CharacterSpriteSheet extends SpriteSheet {
-  constructor(imgPath, width, height, numberOfFrames) {
-    super(imgPath, width, height);
-    this.numberOfFrames = numberOfFrames;
+class RoundBrush extends Brush {
+  constructor(ctx, size, color) {
+    super(ctx, size, color);
+    this.ctx.lineJoin = "round";
+    this.ctx.lineCap = "round";
+    this.ctx.lineWidth = size;
+    this.ctx.strokeStyle = color;
   }
 
-  animate() {}
+  startDrawing(x, y) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(x, y);
+  }
+
+  draw(x, y) {
+    this.ctx.lineTo(x, y);
+    this.ctx.stroke();
+  }
+}
+class RectBrush extends Brush {
+  constructor(ctx, size, color) {
+    super(ctx, size, color);
+    this.ctx.lineJoin = "bevel";
+    this.ctx.lineCap = "butt";
+    this.ctx.lineWidth = size;
+    this.ctx.strokeStyle = color;
+  }
+
+  startDrawing(x, y) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(x, y);
+  }
+
+  draw(x, y) {
+    this.ctx.lineTo(x, y);
+    this.ctx.stroke();
+  }
+}
+const canvas = document.getElementById("drawingCanvas");
+const ctx = canvas.getContext("2d");
+
+document.addEventListener("DOMContentLoaded", () => {
+  let currentBrush;
+
+  function setBrush(brushType, size, color) {
+    if (brushType === "RoundBrush") {
+      currentBrush = new RoundBrush(ctx, size, color);
+    } else if (brushType === "RectBrush") {
+      currentBrush = new RectBrush(ctx, size, color);
+    } else if (brushType === null) {
+      currentBrush.ctx.lineWidth = size;
+    }
+    if (brushType === null && size === null) {
+      currentBrush.ctx.strokeStyle = color;
+    }
+  }
+  setBrush("RoundBrush", 8, "black");
+
+  let isDrawing = false;
+
+  function startDrawing(event) {
+    isDrawing = true;
+    const { offsetX, offsetY } = event;
+    currentBrush.startDrawing(offsetX, offsetY);
+  }
+
+  function draw(event) {
+    if (!isDrawing) return;
+    const { offsetX, offsetY } = event;
+    currentBrush.draw(offsetX, offsetY);
+  }
+
+  function stopDrawing() {
+    isDrawing = false;
+  }
+
+  const brushSelector = document.getElementById("brushSelector");
+  brushSelector.addEventListener("change", (e) => {
+    const selectedBrush = e.target.value;
+    setBrush(selectedBrush, null, null);
+  });
+
+  var slider = document.getElementById("numberSlider");
+  var output = document.getElementById("selectedNumber");
+  output.innerHTML = "Selected Number: " + slider.value;
+  slider.oninput = function () {
+    output.innerHTML = "Selected Number: " + this.value;
+  };
+  slider.addEventListener("change", (e) => {
+    const size = e.target.value;
+    setBrush(null, parseInt(size), null);
+  });
+
+  const colorPicker = document.getElementById("colorPicker");
+  colorPicker.addEventListener("change", (e) => {
+    color = e.target.value;
+    setBrush(null, null, color);
+  });
+
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", stopDrawing);
+  canvas.addEventListener("mouseout", stopDrawing);
+});
+
+function clearArea() {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }

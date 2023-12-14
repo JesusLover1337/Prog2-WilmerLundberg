@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>game blet</title>
-    <style>
-        body{
-            display: flex;
-            justify-content: center;
-            overflow-y: hidden;
-        }
-        #backround{
-            position: absolute;
-        }
-         #box{
-            z-index: 1;
-        } 
-    </style>
+    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touch Drawing</title>
 </head>
-<body id="body">
-    <canvas id="box" width="900" height="600"></canvas>
-    <canvas id="backround" width="900" height="600" style="border:1px solid red"></canvas>
-    
-    <script src="main.js"></script>
+<body>
+  <canvas id="drawingCanvas" width="750" height="500"></canvas>
+
+<div class="control-panel">
+  <label for="brushSelector">Select Brush: </label>
+  <select id="brushSelector">
+    <option value="RoundBrush">Round Brush</option>
+    <option value="RectBrush">Rect Brush</option>
+  </select>
+    <label >Select Size: </label>
+  <input type="range" id="numberSlider" min="1" max="10" value="8" step="1">
+  <p id="selectedNumber">Selected Number: 8</p>
+  <label >Select Color: </label>
+  <input type="color" id="colorPicker" value="#000000">
+  <button onclick="clearArea()">Clear Area</button>
+</div>
+
+
+        <script src="main.js"></script>
 </body>
 </html>
