@@ -26,7 +26,7 @@ class Brush {
 }
 class RoundBrush extends Brush {
   constructor(ctx, size, color) {
-    super(ctx, size, color);
+    super(ctx);
     this.ctx.lineJoin = "round";
     this.ctx.lineCap = "round";
     this.ctx.lineWidth = size;
@@ -45,7 +45,7 @@ class RoundBrush extends Brush {
 }
 class RectBrush extends Brush {
   constructor(ctx, size, color) {
-    super(ctx, size, color);
+    super(ctx);
     this.ctx.lineJoin = "butt";
     this.ctx.lineCap = "butt";
     this.ctx.lineWidth = size;
@@ -80,9 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
       currentBrush.ctx.strokeStyle = color;
     }
     if (currentBrush.ctx.lineCap === "butt") {
-      currentBrush.drawPreview(25 - currentBrush.ctx.lineWidth / 2, 25, ctx2);
+      currentBrush.drawPreview(
+        ctx2.canvas.width / 2 - currentBrush.ctx.lineWidth / 2,
+        ctx2.canvas.width / 2,
+        ctx2
+      );
     } else {
-      currentBrush.drawPreview(25, 25, ctx2);
+      currentBrush.drawPreview(
+        ctx2.canvas.width / 2,
+        ctx2.canvas.height / 2,
+        ctx2
+      );
     }
   }
   setBrush("RoundBrush", 8, "black");
